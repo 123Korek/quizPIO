@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Controller {
     private int currentQue = 0;
     private int correctAns = 0;
-    private String selectedText;
+    private String selectedText = "Null";
     private QuestionBase questionBase = new QuestionBase("src/main/exampleQuiz");
     @FXML
     private Label Question;
