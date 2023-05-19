@@ -8,6 +8,8 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 
+import java.util.ArrayList;
+
 public class Controller {
     private int currentQue = 0;
     private int correctAns = 0;
@@ -30,10 +32,12 @@ public class Controller {
 
     public void initialize(){
         Question.setText(questionBase.getQuestion(currentQue).getW());
-        btnAnswer1.setText(questionBase.getQuestion(currentQue).getAnswers()[0]);
+        setAnswers();
+
+        /*btnAnswer1.setText(questionBase.getQuestion(currentQue).getAnswers()[0]);
         btnAnswer2.setText(questionBase.getQuestion(currentQue).getAnswers()[1]);
         btnAnswer3.setText(questionBase.getQuestion(currentQue).getAnswers()[2]);
-        btnAnswer4.setText(questionBase.getQuestion(currentQue).getAnswers()[3]);
+        btnAnswer4.setText(questionBase.getQuestion(currentQue).getAnswers()[3]);*/
 
         ToggleGroup toggleGroup = new ToggleGroup();
         btnAnswer1.setToggleGroup(toggleGroup);
@@ -57,10 +61,11 @@ public class Controller {
 
         currentQue++;
         Question.setText(questionBase.getQuestion(currentQue).getW());
-        btnAnswer1.setText(questionBase.getQuestion(currentQue).getAnswers()[0]);
+        /*btnAnswer1.setText(questionBase.getQuestion(currentQue).getAnswers()[0]);
         btnAnswer2.setText(questionBase.getQuestion(currentQue).getAnswers()[1]);
         btnAnswer3.setText(questionBase.getQuestion(currentQue).getAnswers()[2]);
-        btnAnswer4.setText(questionBase.getQuestion(currentQue).getAnswers()[3]);
+        btnAnswer4.setText(questionBase.getQuestion(currentQue).getAnswers()[3]);*/
+        setAnswers();
 
         if (questionBase.getSize() == currentQue + 1){
             btnNext.setVisible(false);
@@ -89,5 +94,26 @@ public class Controller {
         AnchorPane.setLeftAnchor(Question, 100.0);
 
         Question.setText("Gratulacje, twój wynik to: " + correctAns + " na " + questionBase.getSize() + " punktów!");
+    }
+
+    private void setAnswers(){
+        ArrayList<String> AnwersList = new ArrayList<>();
+        AnwersList.add(questionBase.getQuestion(currentQue).getAnswers()[0]);
+        AnwersList.add(questionBase.getQuestion(currentQue).getAnswers()[1]);
+        AnwersList.add(questionBase.getQuestion(currentQue).getAnswers()[2]);
+        AnwersList.add(questionBase.getQuestion(currentQue).getAnswers()[3]);
+        int a;
+        a = (int) (Math.random() * (AnwersList.size()));
+        btnAnswer1.setText(AnwersList.get(a));
+        AnwersList.remove(a);
+        a = (int) (Math.random() * (AnwersList.size()));
+        btnAnswer2.setText(AnwersList.get(a));
+        AnwersList.remove(a);
+        a = (int) (Math.random() * (AnwersList.size()));
+        btnAnswer3.setText(AnwersList.get(a));
+        AnwersList.remove(a);
+        a = (int) (Math.random() * (AnwersList.size()));
+        btnAnswer4.setText(AnwersList.get(a));
+        AnwersList.remove(a);
     }
 }
